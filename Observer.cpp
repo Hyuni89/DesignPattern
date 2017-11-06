@@ -10,14 +10,19 @@ class Element {
 public:
     virtual void* run()=0;
     virtual int posNum()=0;
+    virtual void update(int)=0;
     virtual ~Element() {};
 };
 
 class SubMachine: public Element {
     int num;
+    int limit;
+    bool *flag;
 public:
-    SubMachine() {
+    SubMachine(bool *flag) {
         num=0;
+        limit=0x80000000;
+        this->flag=flag;
     }
     ~SubMachine() {
         printf("Delete [%lu][%d]\n", pthread_self(), num);
@@ -28,10 +33,16 @@ public:
             sleep(sleepTime);
             int inc=(rand()%101)-50;
             num+=inc;
+            if(num<limit) {
+                *flag=true;
+                delete this;
+                return (void*)0;
+            }
             printf("[%lu]thread num is [%d]\n", pthread_self(), num);
         }
     }
     virtual int posNum() {return num;}
+    virtual void update(int l) {limit=l;}
     static void* runHelper(void *element) {
         return ((SubMachine*)element)->run();
     }
@@ -40,6 +51,7 @@ public:
 class PrimeOne {
     vector<Element*> list;
     vector<pthread_t*> thList;
+    vector<bool*> flag;
     void del(int index) {
         Element *get=list[index];
         pthread_t *getThread=thList[index];
@@ -50,11 +62,32 @@ class PrimeOne {
         delete get;
     }
 public:
-    void add(Element *in) {
+    void add() {
+        bool *f=new bool(false);
+        flag.push_back(f);
+        Element *in=new SubMachine(f);
         pthread_t *tmpThread=new pthread_t;
         pthread_create(tmpThread, NULL, SubMachine::runHelper, in);
         list.push_back(in);
         thList.push_back(tmpThread);
+    }
+    void limitUpdate(int limit) {
+        for(int i=0; i<list.size(); i++) {
+            if(!(*flag[i])) {
+                list[i]->update(limit);
+            }
+        }
+        for(int i=0; i<list.size(); i++) {
+            if(*flag[i]) {
+                delete flag[i];
+                flag.erase(flag.begin()+i);
+                list.erase(list.begin()+i);
+                delete thList[i];
+                thList.erase(thList.begin()+i);
+                flag.erase(flag.begin()+i);
+                i--;
+            }
+        }
     }
     void cut(int limit) {
         for(int i=0; i<list.size(); i++) {
@@ -71,7 +104,9 @@ public:
     PrimeOne() {}
     PrimeOne(int n) {
         for(int i=0; i<n; i++) {
-            Element *tmp=new SubMachine();
+            bool *f=new bool(false);
+            flag.push_back(f);
+            Element *tmp=new SubMachine(f);
             pthread_t *tmpThread=new pthread_t;
             pthread_create(tmpThread, NULL, SubMachine::runHelper, tmp);
             list.push_back(tmp);
@@ -81,8 +116,6 @@ public:
     ~PrimeOne() {
         for(int i=0; i<list.size(); i++) {
             del(i);
-            delete list[i];
-            delete thList[i];
         }
     }
 };
@@ -94,8 +127,8 @@ int main() {
     printf("Main Thread[%lu]\n", pthread_self());
     for(int i=0; i<5; i++) {
         sleep(60);
-        printf("Cut Call[%d]\n", i*10);
-        p.cut(i*10);
+        printf("Limit [%d]\n", i*10);
+        p.limitUpdate(i*10);
         printf("Element Size is [%d]\n", p.getSize());
     }
     return 0;
