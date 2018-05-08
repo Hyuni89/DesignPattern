@@ -1,43 +1,9 @@
-# DesignPattern
-DesignPattern
+# DesignPattern  
 
-## 1. Strategy Pattern
-- Strategy Pattern  
-알고리즘 군을 정의하고 각각을 캡슐화하여 교환해서 사용할 수 있다. (독립적)  
-- 디자인 원칙  
-달라지는 부분을 찾아내고, 달라지지 않는 부분으로 부터 분리  
-상속보다는 구성을 활용  
-구현이 아닌 인터페이스에 초점  
-- Idea  
-LM을 load 할때, 언어별 동작은 read, load, write으로 구분 할 수 있지만 세부적인 동작은 언어별 특성마다 다를 수 있다.  
-예를 들면, 영어의 경우 read 한 데이터를 바로 메모리에 올려서 처리 할 수 있지만 한글의 경우 메모리에 올릴때 조합형으로 변형해야 처리가 편하다.  
-출력 역시 영어는 메모리에 적재된 그대로 출력하면 되지만 한글은 분리된 조합형을 완성형으로 바꿔서 출력해야 한다.  
-큰 흐름은 동일하지만 세부 동작이 다르므로 다른 부분을 묶어 하나의 인터페이스를 만들고, 세부 구현을 통해 모듈을 갈아 끼면 같은 클래스에서 다른 동작을 할 수 있게 된다.  
+### [1. Strategy Pattern](./Strategy/Strategy.md)  
+### [2. Observer Pattern](./Observer/Observer.md)  
+### [3. Decorator Pattern](./Decorator/Decorator.md)  
+### [4. Factory Pattern](./Factory/Factory.md)  
 
-## 2. Observer Pattern
-- Observer Pattern  
-한 객체의 상태 변화를 의존하는 다른 객체들이 받아 자동으로 갱신되는 One-to-Many(일대다) 관계를 가진다.  
-- 디자인 원칙  
-상호작용하는 객체 사이에서 가능하면 느슨하게 결합하는 디사인 사용 (한 객체가 변하더라도 다른 객체에 영향이 없어야 함)  
-- Idea  
-하나의 메인 쓰레드와 옵저버 쓰레드로 구성된다. 옵저버 쓰레드는 0부터 10까지 랜덤한 시간에 -50부터 50까지 랜덤한 숫자를 더한다.  
-메인 쓰레드는 1분마다 제한 값을 업데이트 하며, 옵저버들에게 알려준다. 이 제한값을 넘지 못한 옵저버들은 스스로 삭제되고 멘 마지막까지 살아남은 옵저버 쓰레드의 값이 출력된다.  
 
-## 3. Decorator Pattern
-- Decorator Pattern  
-객체의 상태가 동적으로 변하거나 추가될 수 있다.  
-- 디자인 원칙  
-클래스는 확장에 대해 열려있어야 하지만 코드 변경에 대해선 닫혀있어야 함  
-- Idea  
-Linux terminal에서 문자에 색을 출력하거나 색상 반전, 밑줄등의 기능이 있다.  
-이 기능의 일정 범위 영역을 이용해 word를 장식하며 색상이 변하게 했다.  
-
-## 4. Factory Pattern
-- Factory Method Pattern  
-서브 클래스에서 생성하는 객체 결정.  
-- Abstract Factory Pattern  
-서로 연관되거나 의존하는 객체를 구상 클래스를 지정하지 않고도 생성.  
-- 디자인 원칙  
-추상화 된 것에 의존하도록 구성  
-- Idea  
-
+<sub><sub>**!!주의!!** 독학 + 인터넷 검색을 통해 공부한 내용이기에 잘못 이해한 부분이 있을 가능성이 있습니다.</sub></sub>  
