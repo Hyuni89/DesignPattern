@@ -77,7 +77,7 @@ class IPreload:
     def show(self):
         pass
 
-class PreloadKO(IPreload):
+class Preload(IPreload):
     def __init__(self, m):
         self.module=m
     def load(self, path):
@@ -85,16 +85,8 @@ class PreloadKO(IPreload):
     def show(self):
         self.module.show(self.word)
 
-class PreloadEN(IPreload):
-    def __init__(self, m):
-        self.module=m
-    def load(self, path):
-        self.word=self.module.load(path)
-    def show(self):
-        self.module.show(self.word)
-
-ko=PreloadKO(ProcessKO())
-en=PreloadEN(ProcessEN())
+ko=Preload(ProcessKO())
+en=Preload(ProcessEN())
 en.load("en.txt")
 en.inMem()
 en.show()
