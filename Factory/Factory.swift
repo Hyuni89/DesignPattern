@@ -1,63 +1,127 @@
-protocol IProduct {
-    var name: String {get}
-    func A(a: String)
-    func B(b: String)
-    func C(c: String)
+class Glove {
+	var name: String
+	init() {
+		name = "Glove"
+	}
 }
 
-class AProduct: IProduct {
-    var name: String
-    init(name: String) {
-        self.name = name
-    }
-    func A(a: String) {
-        print(self.name, a)
-    }
-    func B(b: String) {
-        print(self.name, b)
-    }
-    func C(c: String) {
-        print(self.name, c)
-    }
+class PlainGlove: Glove {
+	override init() {
+		super.init()
+		self.name = "Plain Glove"
+	}
 }
 
-class BProduct: IProduct {
-    var name: String
-    init(name: String) {
-        self.name = name
-    }
-    func A(a: String) {
-        print(self.name, a)
-    }
-    func B(b: String) {
-        print(self.name, b)
-    }
-    func C(c: String) {
-        print(self.name, c)
-    }
+class HalfGlove: Glove {
+	override init() {
+		super.init()
+		self.name = "Half Glove"
+	}
+}
+
+class LongGlove: Glove {
+	override init() {
+		super.init()
+		self.name = "Long Glove"
+	}
 }
 
 class Factory {
-    var product: IProduct?
-    init() {
-        product = nil
-    }
-    func create(which: Character, name: String) -> IProduct {
-        switch(which) {
-            case "a", "A": self.product = AProduct(name: name)
-            case "b", "B": self.product = BProduct(name: name)
-            default: break
-        }
-        return self.product!
-    }
+	func getMaterial() {
+		print("Normal Material", terminator: " ")
+	}
+	
+	func setDesign() {
+		print("Normal Design", terminator: " ")
+	}
+
+	func doProcess() {
+		print("Normal Process", terminator: " ")
+	}
+
+	func make(menu: String) -> Glove? {
+		getMaterial()
+		setDesign()
+		doProcess()
+
+		switch menu {
+			case "Plain": return PlainGlove()
+			case "Long": return LongGlove()
+			case "Half": return HalfGlove()
+			default: return nil
+		}
+	}
 }
 
-let fac = Factory()
-let elementA = fac.create(which: "A", name: "elementA")
-let elementB = fac.create(which: "b", name: "elementB")
-elementA.A(a: "func A")
-elementA.B(b: "func B")
-elementA.C(c: "func C")
-elementB.A(a: "func A")
-elementB.B(b: "func B")
-elementB.C(c: "func C")
+class FranchFactory: Factory {
+	override func getMaterial() {
+		print("Silk", terminator: " ")
+	}
+
+	override func setDesign() {
+		print("French", terminator: " ")
+	}
+
+	func addJewelry() {
+		print("Diamond", terminator: " ")
+	}
+
+	override func doProcess() {
+		print("HighQ", terminator: " ")
+	}
+
+	override func make(menu: String) -> Glove? {
+		getMaterial()
+		setDesign()
+		addJewelry()
+		doProcess()
+
+		switch menu {
+			case "Plain": return PlainGlove()
+			case "Long": return LongGlove()
+			case "Half": return HalfGlove()
+			default: return nil
+		}
+	}
+}
+
+class KoreanFactory: Factory {
+	override func getMaterial() {
+		print("Leather", terminator: " ")
+	}
+
+	override func setDesign() {
+		print("Korean", terminator: " ")
+	}
+
+	override func doProcess() {
+		print("FastM", terminator: " ")
+	}
+	
+	override func make(menu: String) -> Glove? {
+		getMaterial()
+		setDesign()
+		doProcess()
+
+		switch menu {
+			case "Plain": return PlainGlove()
+			case "Long": return LongGlove()
+			case "Half": return HalfGlove()
+			default: return nil
+		}
+	}
+}
+
+class GloveShop {
+	func order(fac: Factory, menu: String) -> Glove? {
+		return fac.make(menu: menu)
+	}
+}
+
+let gs = GloveShop()
+let g1 = gs.order(fac: FranchFactory(), menu: "Long")
+print(g1!.name)
+let g2 = gs.order(fac: KoreanFactory(), menu: "Plain")
+print(g2!.name)
+let g3 = gs.order(fac: Factory(), menu: "Half")
+print(g3!.name)
