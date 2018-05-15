@@ -11,6 +11,9 @@
 ### [9. Template Method Pattern](./TemplateMethod/TemplateMethod.md)  
 ### [10. Iterator Pattern](./Iterator/Iterator.md)  
 ### [11. Composite Pattern](./Composite/Composite.md)  
+### [12. State Pattern](./State/State.md)  
+### [13. Proxy Pattern](./Proxy/Proxy.md)  
+### [14. Compound Pattern](./Compound/Compound.md)  
 
 
 <sub><sub>**!!주의!!** 독학 + 인터넷 검색을 통해 공부한 내용이기에 잘못 이해한 부분이 있을 가능성이 있습니다.</sub></sub>  
