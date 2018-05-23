@@ -15,9 +15,9 @@
 ### [13. Proxy Pattern](./Proxy/Proxy.md)  
 ### [14. Compound Pattern](./Compound/Compound.md)  
 ### [15. Bridge Pattern](./Bridge/Bridge.md)  
-<!--
 ### [16. Builder Pattern](./Builder/Builder.md)  
 ### [17. Chain of Responsibility Pattern](./Chain/Chain.md)  
+<!--
 ### [18. Flyweight Pattern](./Flyweight/Flyweight.md)  
 ### [19. Interpreter Pattern](./Interpreter/Interpreter.md)  
 ### [20. Mediator Pattern](./Mediator/Mediator.md)  
