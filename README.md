@@ -18,9 +18,9 @@
 ### [16. Builder Pattern](./Builder/Builder.md)  
 ### [17. Chain of Responsibility Pattern](./Chain/Chain.md)  
 ### [18. Flyweight Pattern](./Flyweight/Flyweight.md)  
-<!--
 ### [19. Interpreter Pattern](./Interpreter/Interpreter.md)  
 ### [20. Mediator Pattern](./Mediator/Mediator.md)  
+<!--
 ### [21. Memento Pattern](./Memento/Memento.md)  
 ### [22. Prototype Pattern](./Prototype/Prototype.md)  
 ### [23. Visitor Pattern](./Visitor/Visitor.md)  
