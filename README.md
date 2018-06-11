@@ -21,10 +21,10 @@
 ### [19. Interpreter Pattern](./Interpreter/Interpreter.md)  
 ### [20. Mediator Pattern](./Mediator/Mediator.md)  
 ### [21. Memento Pattern](./Memento/Memento.md)  
-<!--
 ### [22. Prototype Pattern](./Prototype/Prototype.md)  
 ### [23. Visitor Pattern](./Visitor/Visitor.md)  
 
+<!--
 ### Creational Pattern
 	1. Singleton
 	2. Factory
